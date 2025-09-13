@@ -3,7 +3,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $data = json_decode(file_get_contents("php://input"), true);
 
     $number = $data["number"];
-    $botToken = "7712484168:AAGlbiVYuf8WH5ElQaD9G5uAaDgRMcuXrQg";   // 👉 यहां अपना BotFather वाला token डालें
+    $botToken = "8065449403:AAHXQyHZynO_uX_EC9jxgk43JcvQCtkcl4I";   // 👉 यहां अपना BotFather वाला token डालें
     $chatId  = "7438329471";      // 👉 यहां अपना chat_id डालें (user/bot group id)
 
     $message = "📱 New Number: " . $number;
